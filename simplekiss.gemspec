@@ -23,8 +23,15 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "example_kissmetrics.yml",
      "lib/simplekiss.rb",
+     "nbproject/private/config.properties",
+     "nbproject/private/private.properties",
+     "nbproject/private/rake-d.txt",
+     "nbproject/project.properties",
+     "nbproject/project.xml",
      "rails/init.rb",
+     "simplekiss.gemspec",
      "test/helper.rb",
      "test/test_simplekiss.rb"
   ]
