@@ -5,11 +5,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "simplekiss"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "A simple library for adding KISSmetrics to your pages"
+    gem.description = "A simple library which adds KISSMetrics javascript to your pages, based on a YAML config file"
     gem.email = "jamie@shutterscouts.com"
     gem.homepage = "http://github.com/hopeless/simplekiss"
     gem.authors = ["Jamie Lawrence"]
+    gem.files.include %w(rails/init.rb)
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
