@@ -40,9 +40,9 @@ If you want to turn off this behaviour, to stop polluting you stats with every p
 
 
 == TODO/Feedback
- * Tests: yeah, I know. Feel free to help me out here
+* Tests: yeah, I know. Feel free to help me out here
 
 
 == Copyright
 
- Copyright (c) 2010 Jamie Lawrence. See LICENSE for details (MIT licence).
+Copyright (c) 2010 Jamie Lawrence. See LICENSE for details (MIT licence).
