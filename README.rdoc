@@ -1,17 +1,48 @@
 = simplekiss
 
-Description goes here.
+This is a simple library to add KISSmetrics to your layouts. It is configured using a YAML file.
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+== Install
+
+gem install simplekiss
+
+== Configure
+
+Create a kissmetrics.yml file in your app's config/ dir
+
+    #KISSmetrics configuration file.
+    ---
+    apikey: <enter your api key here>
+
+    <controller>:
+      <action>: 'kissmetrics step title'
+      <another action>: 'kissmetrics step title'
+
+    # Example usage
+    user:
+      new: 'Visit signup page'
+      show: 'Viewed account page'
+    post:
+      new: 'Create a new post'
+
+This allows you the customise the name of the action based on the controller and action being called
+
+== Adding KISSmetrics to your layout
+
+Simply add this to the end of your layout, preferably the last thing before <\body>
+
+    <%= kissmetrics if Rails.env == 'production' %>
+
+By default, if an entry isn't found '<controller name>/<action name>' is sent to KISSmetrics instead.
+If you want to turn off this behaviour, to stop polluting you stats with every page:
+
+    <%= kissmetrics(use_defaults=>false) if Rails.env == 'production' %>
+
+
+== TODO/Feedback
+ * Tests: yeah, I know. Feel free to help me out here
+
 
 == Copyright
 
-Copyright (c) 2010 Jamie Lawrence. See LICENSE for details.
+ Copyright (c) 2010 Jamie Lawrence. See LICENSE for details (MIT licence).
