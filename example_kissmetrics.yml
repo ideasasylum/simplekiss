@@ -1,0 +1,14 @@
+#KISSmetrics configuration file.
+---
+apikey: <enter your api key here>
+
+<controller>:
+  <action>: 'kissmetrics step title'
+  <another action>: 'kissmetrics step title'
+
+# Example usage
+user:
+  new: 'Visit signup page'
+  show: 'Viewed account page'
+post:
+  new: 'Create a new post'
