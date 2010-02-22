@@ -1,8 +1,9 @@
 module SimpleKiss
   def kissmetrics(use_default = true)
-    slug = CONFIG[controller_name][action_name]
+    controller_slugs = CONFIG[controller_name]
+    slug = controller_slugs[action_name] unless controller_slugs.nil?
     slug ||= "#{controller_name}/#{action_name}" if use_default
-    apikey = CONFIG['apikey'] #"f07d00f8f9e6049d5c106a14612fa1614d4f3d40"
+    apikey = CONFIG['apikey']
 
     (slug) ?
 "   <script type=\"text/javascript\">
