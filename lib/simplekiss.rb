@@ -30,4 +30,8 @@ module SimpleKiss
     CONFIG['apikey']
   end
   
+  def identify
+    ""
+  end
+  
 end
