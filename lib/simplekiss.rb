@@ -32,9 +32,9 @@ module SimpleKiss
   
   def identify
     return unless CONFIG['identify']
-    CONFIG['identify'].split(".").inject(self) do |memo,word|
+    result = CONFIG['identify'].split(".").inject(self) do |memo,word|
       memo.send(word)
     end
-      
+    "_kmq.push(['identify', #{result}]);"
   end
 end

@@ -104,7 +104,7 @@ describe SimpleKiss do
       end
       
       it "returns the result of evaluting the expression" do
-        @view.identify.should == "email@example.com"
+        @view.identify.should == "_kmq.push(['identify', email@example.com]);"
       end
       
     end
