@@ -17,21 +17,24 @@ module SimpleKiss
   
   def api_code
     %(
-      function _kms(u){
-        setTimeout(function(){
-          var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
-          s.src = u; f.parentNode.insertBefore(s, f);
-          }, 1);
+    function _kms(u){
+      setTimeout(function(){
+        var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+        s.src = u; f.parentNode.insertBefore(s, f);
+        }, 1);
       }
       _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/#{self.api_key}.1.js');)
   end
   
   def api_key
-    CONFIG['apikey']
+      CONFIG['apikey']
   end
   
   def identify
-    ""
+    return unless CONFIG['identify']
+    CONFIG['identify'].split(".").inject(self) do |memo,word|
+      memo.send(word)
+    end
+      
   end
-  
 end

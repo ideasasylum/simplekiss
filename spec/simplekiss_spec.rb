@@ -37,7 +37,6 @@ describe SimpleKiss do
     context "given that the action and controller are set on the config file" do
       
       around(:each) do |example|
-        oldconfig = SimpleKiss::CONFIG
         SimpleKiss::CONFIG['user'] = {'new' => "Visit signup page",'show' => "Visit Account page"}
         example.run
         SimpleKiss::CONFIG.delete('user')
@@ -89,6 +88,32 @@ describe SimpleKiss do
   end
   
   describe "#identify" do
+    
+    context "given that identify is set on the config file" do
+      
+      around(:each) do |example|
+        SimpleKiss::CONFIG['identify'] = 'current_user.email'
+        example.run
+        SimpleKiss::CONFIG.delete('identify')
+      end
+      
+      before(:each) do
+        fake_user = stub('user')
+        fake_user.stub(:email) {"email@example.com"} 
+        @view.stub(:current_user) {fake_user}
+      end
+      
+      it "returns the result of evaluting the expression" do
+        @view.identify.should == "email@example.com"
+      end
+      
+    end
+    
+    context "given that identify is set on the config file" do
+      it "returns nil" do
+        @view.identify.should == nil
+      end
+    end
     
   end
   
