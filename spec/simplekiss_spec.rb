@@ -36,13 +36,19 @@ describe SimpleKiss do
     
     context "given that the action and controller are set on the config file" do
       
-      before(:each) do
+      around(:each) do |example|
+        oldconfig = SimpleKiss::CONFIG
         SimpleKiss::CONFIG['user'] = {'new' => "Visit signup page",'show' => "Visit Account page"}
+        example.run
+        SimpleKiss::CONFIG.delete('user')
+      end
+      
+      before(:each) do
         @view.stub(:controller_name) {'user'}
         @view.stub(:action_name) {'show'}
       end
       
-      it "returns the complete javascript code" do
+      it "returns the complete javascript code with the configured name" do
         js = @view.kissmetrics
         js.should include('<script type="text/javascript">')
         js.should include('var _kmq = _kmq || [];')
@@ -51,6 +57,38 @@ describe SimpleKiss do
       end
       
     end
+    
+    context "given that the action and controller are not set on the config file" do
+      
+      before(:each) do
+        @view.stub(:controller_name) {'user'}
+        @view.stub(:action_name) {'show'}
+      end
+      
+      
+      context "and default is on" do
+        it "returns the complete javascript code with the default slug" do
+          js = @view.kissmetrics
+          js.should include('<script type="text/javascript">')
+          js.should include('var _kmq = _kmq || [];')
+          js.should include('_kmq.push([\'record\', user/show]);')
+          js.should include('</script>')
+        end
+      end
+      
+      context "and default is off" do
+        it "returns a blank string" do
+          js = @view.kissmetrics(false).should == ""
+        end
+      end
+      
+      
+      
+    end
+    
+  end
+  
+  describe "#identify" do
     
   end
   
