@@ -3,16 +3,31 @@ module SimpleKiss
     controller_slugs = CONFIG[controller_name]
     slug = controller_slugs[action_name] unless controller_slugs.nil?
     slug ||= "#{controller_name}/#{action_name}" if use_default
-    apikey = CONFIG['apikey']
-
+    
     (slug) ?
-"   <script type=\"text/javascript\">
-      var KM_KEY = \"#{apikey}\";
-      document.write(unescape(\"%3Cscript src='\" + ((\"https:\" == document.location.protocol) ? \"https://s3.amazonaws.com/\" : \"http://\") + \"scripts.kissmetrics.com/t.js' type='text/javascript'%3E%3C/script%3E\"));
+    %(
+    <script type="text/javascript">
+    var _kmq = _kmq || [];
+    #{api_code}
+    _kmq.push(['record', #{slug}]);
+    #{identify}
     </script>
-    <script type=\"text/javascript\">
-      KM.record(\"#{slug}\")
-    </script>
-    " : ""
+    ) : ""
   end
+  
+  def api_code
+    %(
+      function _kms(u){
+        setTimeout(function(){
+          var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+          s.src = u; f.parentNode.insertBefore(s, f);
+          }, 1);
+      }
+      _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/#{self.api_key}.1.js');)
+  end
+  
+  def api_key
+    CONFIG['apikey']
+  end
+  
 end
