@@ -1,0 +1,9 @@
+#KISSmetrics configuration file.
+---
+apikey: dumbapikey
+
+# user:
+#   new: 'Visit signup page'
+#   show: 'Viewed account page'
+# post:
+#   new: 'Create a new post'
